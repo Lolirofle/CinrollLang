@@ -1,0 +1,103 @@
+General:
+	Unicode support
+	Unlimited length on user-defined symbols
+	Memory model flexibility. The language should not enforce
+	Standard library typenames begin with capital letter
+	Some easy way of defining associative binary operators (and non-associative too)
+	Lazy evaluation of function arguments. Should be defined in the function declaration (Alias of function type? Make it like D lang? Will this be confusing or convenient?)
+	Labeling loops and break out of labeled loops specifically or by index
+	self[FUNCTION] in function scope returns the function itself
+	Workspaces using "."
+	"local" keyword for symbols. Like "static" in C/C++ and "sealed" in Scala but can be used as "local[WORKSPACE]", "local[FILE]", "local[COMPILATION_UNIT]" explicitly
+	"import" imports a file and uses the root workspace by default. "import[WORKSPACE]" uses the local workspace
+
+Data:
+	Everything that resides in runtime is data. Functions, constants, variables.
+	All data have a Pointer referencing method:
+		def ref(data[T] variable):Pointer[T];
+
+Functions:
+	Function overloading from the given arguments
+	Unicode function names
+	Syntax:
+		def functionName(Int arg) -> Int = arg+1;
+
+		def result:Int = functionName(5);
+	or in lambda form:
+		def functionName = (Int arg) -> arg+1
+		def functionName = (Int arg) -> Int{arg+1}
+	or (The difference is that `out` must be allocated and therefore doesn't need to allocate a return value in beforehand) (Or should they be equivalent and ban expressions from being used as statements?):
+		def functionName(Int arg) => (Pointer[Int] out){
+			out = arg+1;
+		}
+
+		def result:Int;
+		functionName(5) => (result);
+
+Function declaration:
+	def functionName(Int,String):Int;
+	def functionName(a,b) = a + strlen(b);
+
+	The function declaration makes the parameter and return types known for the implementation.
+	Unlike variable declarations, these are not allocating data.
+
+Constants (Immutable values, can be treated as lvalues):
+	def a = 5;
+	def a:Int = 5;
+
+Variables (Mutable values):
+	def a:Var = 5;
+	def a:Var[Int] = 5;
+
+	The type "Var[T]" has a "=" method defined that can modifiy its value, but the new must stay as T.
+	Variables have an implicit conversion for values:
+		implicit def val(Var[T] variable):T;
+
+Tuples/structures/argument lists are multiple values together:
+	(Int,Int) tuple = (2,4);
+	(Int a,Int b) namedTuple = (2,4);
+
+Pointer types:
+	The type definition is as following:
+		Pointer[Int]
+	and has a dereference method defined with the type:
+		def deref(Pointer[T] ptr):T;
+	Mutable pointer to mutable integer:
+		Var[Pointer[Var[Int]]]
+
+Types:
+	All types can inherit each other in different ways.
+	Type aliases: (A is another way of saying B)
+		type A = B
+	Type containment: (A behaves like B datawise, but cannot be used in place of B)
+		type A = (B)
+	Structure/record:
+		type A = (B,C)
+	Bottom type for error handling
+	Non-builtin/implemented tagged union types. Makes it possible with a "Option" type:
+		type A = Union[B,C,D,E]
+	Int with specific size: "Int[64]", "Int[32]"
+	Fastest smallest sized "Int.Fastest[8]", at least of size "Int.Least[32]" using type aliases to the specific sized ints
+	Types of types: (Do they need to be separated?)
+		Abstract types:
+			Describes a functionality
+		Data types:
+			Describes data. Like tuples (data grouped together) or raw numbers, arrays and so forth.
+	Type parameters:
+
+Inlining/static compiling:
+	Behaves like a normal function but force inlines it: (Inlined functions will have some restrictions)
+		inline def functionName(Int i) -> Int = i+1
+	or (Inlined constants/variables)
+		inline def callFunctionName:Int = functionName(5)
+	Preprocessor replacements: (They shouldn't be needed?)
+	(All pure or inlined string functions should work for symbol. The "symbol" type should be an alias of "String" for the compiler)
+		inline def if2(symbol i) -> symbol = "if(" ++ i ++ ")"
+
+Memory management:
+	Manual memory management with a heap (malloc and free) and a stack (based on scope).
+	`malloc` is defined as:
+		def malloc(size size) -> heapPointer;
+	"HeapPointer" is a child type of "Pointer"
+
+Runtime types:
