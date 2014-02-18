@@ -4,7 +4,7 @@
 %error-verbose
 
 %code requires{
-  #include "nodes/expression.hpp"
+  #include "nodes/all.hpp"
   #include <string>
   #include <iostream>
 

@@ -1,7 +1,6 @@
 %{
 	#include "lang_rules.hpp"
-	#include "nodes/expression.hpp"
-	#include "number_converter.hpp"
+	#include "nodes/all.hpp"
 	
 	#define TOKEN(t) (yylval.token = t)
 	#define YY_NO_INPUT
@@ -30,12 +29,12 @@
 }
 
 [0-9]+ {//Integers
-	yylval.number = new cinroll::nodes::number_literal(std::string(yytext,yyleng));
+	yylval.number = new cinroll::nodes::base10_number_literal(std::string(yytext,yyleng));
 	return INTEGER;
 }
 
 \'(.)\' {//Char //TODO: Enforce "Char" type
-	yylval.number = new cinroll::nodes::number_literal(std::string(yytext+1,1),cinroll::number_converter_char);
+	yylval.number = new cinroll::nodes::char_number_literal(std::string(yytext+1,1));
 	return STRING;
 }
 
