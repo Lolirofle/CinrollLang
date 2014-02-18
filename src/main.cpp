@@ -3,7 +3,7 @@
 #include "nodes/expression.hpp"
 
 int main(){
-	program = new cinroll::block();
+	program = new cinroll::nodes::block();
 
 	//Begin parsing using rules and tokens
 	yyparse();

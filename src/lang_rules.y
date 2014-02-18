@@ -6,6 +6,7 @@
 %code requires{
   #include "nodes/expression.hpp"
   #include <string>
+  #include <iostream>
 
   //Declarations
   #define YYERROR_VERBOSE 1
@@ -21,15 +22,15 @@
   int token;
 
   //Token storage IDs
-  cinroll::identifier* identifier;
-  cinroll::string* string;
-  cinroll::number* number;
+  cinroll::nodes::identifier*     identifier;
+  cinroll::nodes::string_literal* string;
+  cinroll::nodes::number_literal* number;
 
-  cinroll::expression* expression;
+  cinroll::nodes::expression* expression;
 }
 
 //Tokens
-%token INTEGER IDENTIFIER STRING
+%token INTEGER IDENTIFIER STRING BYTE
 %token TOKEN_STATEMENT_END TOKEN_EQUAL TOKEN_PARENTHESIS_BEGIN TOKEN_PARENTHESIS_END TOKEN_BLOCK_BEGIN TOKEN_BLOCK_END TOKEN_DEFINE TOKEN_TYPEHINT
 
 //Types from yylval for the rules
@@ -45,7 +46,7 @@
 //Rules
 %%
 
-program: program expression TOKEN_STATEMENT_END ;
+program: program expression TOKEN_STATEMENT_END { $2->print(std::cout); std::cout << std::endl; delete $2; } ;
        | 
        ;
 

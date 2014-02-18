@@ -3,6 +3,6 @@
 
 #include "nodes/expression.hpp"
 
-cinroll::expression* program;
+cinroll::nodes::expression* program;
 
 #endif

@@ -3,43 +3,54 @@
 
 #include <string>
 #include <list>
+#include <iostream>
+#include "number_converter.hpp"
 
-namespace cinroll{
+namespace cinroll{namespace nodes{
 	class expression{
 	public:
-		virtual std::string toString()=0;
+		virtual ~expression(){};
+		virtual void print(std::ostream& out)=0;
 	};
 
 	class block : public expression{
 	protected:
-		std::list<cinroll::expression*> expressions;
+		std::list<cinroll::nodes::expression*> expressions;
 	public:
 		block() : expressions() {}
 
-		std::string toString(){
-			return "block";
+		void print(std::ostream& out){
+			out << "Block{";
+			for(auto expr = this->expressions.begin(); expr!=this->expressions.end(); expr++){
+				(*expr)->print(out);
+				out << "; ";
+			}
+			out << '}' << std::endl;
 		}
 	};
 
-	class number : public expression{
+	class number_literal : public expression{
 	protected:
 		std::string str;
+		cinroll::number_converter converter;
 	public:
-		number(std::string str) : str(str){}
+		number_literal(std::string str,cinroll::number_converter& converter = cinroll::number_converter_base10) : str(str),converter(converter){}
+		~number_literal(){}
 
-		std::string toString(){
-			return str;
+		void print(std::ostream& out){
+			out << "Number[" << converter.name << "](" << str << ')';
 		}
 	};
 
-	class string : public expression{
+	class string_literal : public expression{
 	protected:
 		std::string str;
 	public:
-		string(std::string str) : str(str){}
+		string_literal(std::string str) : str(str){}
+		~string_literal(){}
 
-		std::string toString(){
-			return str;
+		void print(std::ostream& out){
+			out << "String(" << str << ')';
 		}
 	};
 
@@ -48,11 +59,12 @@ namespace cinroll{
 		std::string str;
 	public:
 		identifier(std::string str) : str(str){}
+		~identifier(){}
 
-		std::string toString(){
-			return str;
+		void print(std::ostream& out){
+			out << "Identifier(" << str << ')';
 		}
 	};
-}
+}}
 
 #endif
