@@ -8,9 +8,8 @@ namespace cinroll{namespace nodes{
 	class identifier_call : public expression{
 	public:
 		std::string str;
-		expression* expr;
 
-		identifier_call(std::string str,expression* expr = NULL);
+		identifier_call(std::string str);
 		~identifier_call();
 
 		std::ostream& operator<<(std::ostream& out);

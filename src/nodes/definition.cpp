@@ -8,12 +8,4 @@ namespace cinroll{namespace nodes{
 	definition::~definition(){
 		delete this->expr;
 	}
-
-	std::ostream& definition::operator<<(std::ostream& out){
-		out << "Define(" << str << ")";
-		if(this->expr)
-			out << " as " << *this->expr;
-
-		return out;
-	}
 }}

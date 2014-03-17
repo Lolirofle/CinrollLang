@@ -20,10 +20,15 @@
 	return TOKEN(TOKEN_STATEMENT_END);
 }
 
-"def"    return TOKEN(TOKEN_DEFINE);
-","      return TOKEN(TOKEN_COMMASEPARATOR);
+[,] {
+	return TOKEN(TOKEN_COMMA_SEPARATOR);
+}
 
-[A-Za-z][A-Za-z0-9]* {//Identifier
+"SHOW" {
+	return TOKEN(STATEMENT_SHOW);
+}
+
+[A-Za-z_][A-Za-z_0-9]* {//Identifier
 	yylval.identifier = (str){(size_t)yyleng,yytext};
 	return IDENTIFIER;
 }
@@ -31,6 +36,11 @@
 [0-9][0-9_]* {//Integers
 	yylval.number = new cinroll::nodes::base10_number_literal(std::string(yytext,yyleng));
 	return INTEGER;
+}
+
+[=]?[+\-*/!#%&?<>|]+ {//Symbols
+	yylval.identifier = (str){(size_t)yyleng,yytext};
+	return SYMBOL;
 }
 
 \'(.)\' {//Char //TODO: Enforce "Char" type
