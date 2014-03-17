@@ -17,7 +17,7 @@ namespace cinroll{namespace nodes{
 		virtual long convert(std::string str)=0;//TODO: Handle more complex cases
 		//virtual cinroll::types::number type()=0;
 
-		void print(std::ostream& out);
+		std::ostream& operator<<(std::ostream& out);
 	};
 
 	class base10_number_literal : public number_literal{

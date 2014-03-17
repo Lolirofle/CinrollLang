@@ -2,13 +2,19 @@
 
 namespace cinroll{namespace nodes{
 	block::block() : expressions(){}
+	block::~block(){
+		for(auto expr = this->expressions.begin(); expr!=this->expressions.end(); expr++){
+			delete *expr;;
+		}
+	}
 
-	void block::print(std::ostream& out){
+	std::ostream& block::operator<<(std::ostream& out){
 		out << "Block{";
 		for(auto expr = this->expressions.begin(); expr!=this->expressions.end(); expr++){
-			(*expr)->print(out);
-			out << "; ";
+			out << *expr << "; ";
 		}
 		out << '}' << std::endl;
+
+		return out;
 	}
 }}

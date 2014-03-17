@@ -12,7 +12,7 @@ namespace cinroll{namespace nodes{
 		string_literal(std::string str);
 		~string_literal();
 
-		void print(std::ostream& out);
+		std::ostream& operator<<(std::ostream& out);
 	};
 }}
 

@@ -21,6 +21,7 @@ Data:
 		def ref(data[T] variable):Pointer[T];
 
 Functions:
+	One input, one output
 	Function overloading from the given arguments
 	Unicode function names
 	Syntax:
@@ -37,6 +38,7 @@ Functions:
 
 		def result:Int;
 		functionName(5) => (result);
+	Difference between closure and function. Normal functions don't capture scope definitions.
 
 Function declaration:
 	def functionName(Int,String):Int;
@@ -60,6 +62,7 @@ Variables (Mutable values):
 Tuples/structures/argument lists are multiple values together:
 	(Int,Int) tuple = (2,4);
 	(Int a,Int b) namedTuple = (2,4);
+	`,` is the tuple join function as in "(1,2)"
 
 Pointer types:
 	The type definition is as following:
@@ -68,25 +71,32 @@ Pointer types:
 		def deref(Pointer[T] ptr):T;
 	Mutable pointer to mutable integer:
 		Var[Pointer[Var[Int]]]
+	Nullable pointer:
+		(Pointer[Int] | Null)
 
 Types:
-	All types can inherit each other in different ways.
 	Type aliases: (A is another way of saying B)
 		type A = B
-	Type containment: (A behaves like B datawise, but cannot be used in place of B)
-		type A = (B)
+		type A = [B]
+	Hidden type alias: (A behaves like B datawise, but cannot be used in place of B. B can be used in place of A)
+		type A => B
 	Structure/record:
-		type A = (B,C)
+		type A = [B,C]
 	Bottom type for error handling
-	Non-builtin/implemented tagged union types. Makes it possible with a "Option" type:
-		type A = Union[B,C,D,E]
+	Non-builtin/implemented tagged union types. Makes it possible for a "Option" type to be implemented:
+		type A = TaggedUnion[B,C,D,E]
+	Builtin union types. Makes it possible for a "TaggedUnion" type to be implemented:
+		type A = [B|C|D|E]
 	Int with specific size: "Int[64]", "Int[32]"
 	Fastest smallest sized "Int.Fastest[8]", at least of size "Int.Least[32]" using type aliases to the specific sized ints
-	Types of types: (Do they need to be separated?)
+	Types of types:
 		Abstract types:
 			Describes a functionality
+			Can inherit other abstract types, requiring them for its own functionality.
 		Data types:
 			Describes data. Like tuples (data grouped together) or raw numbers, arrays and so forth.
+			Can inherit other data types' functionalities if the sizes is equal or larger in size (Union type).
+			Can satisfy abstract types' constraints and make use of their functionality.
 	Type parameters:
 
 Inlining/static compiling:

@@ -1,0 +1,27 @@
+Pointer(Array(Option(Int),5)) = Int?[5]* = (((Int)?)[5])*
+T[10] as (((((T)[)1)0)]) or ((T)[10])
+
+Function definitions and types:
+	1: Normal function definition
+		def f(x,y) = x*4;
+	2: Lambda function in a variable definition
+		def f = (x,y) -> x*4;
+	3: Explicit typing declaration with an assignment of a lambda function
+		def f:Pointer(Function((Int,Int),Int));
+		f = (x,y) -> x*4;
+	4: Implicit typing declaration with an assignment of a lambda function
+		def f;
+		f = (x,y) -> x*4;
+
+(Int,Int) <= Tuple.combine(Int,Int) <= (Int)(Int)
+
+Types with a known size is allocable and declarable. This is indicated by the builtin type `Memory.Size`. The function types don't inherit the properties of the size type.
+
+function a(int i) = int{
+	return 5;
+}
+
+function a(int i) = int(5)
+
+type test_function = function(int,int)
+test_function a(i) = _+1;

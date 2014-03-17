@@ -14,21 +14,21 @@
 
 %%
 
-[ \t]|(\/\*(.*)\*\/)|(\/\/([^\n]*)) ;
+[ \t\n]|(\/\*(.*)\*\/)|(\/\/([^\n]*)) ;
 
-[;\n] {
+[;] {
 	return TOKEN(TOKEN_STATEMENT_END);
 }
 
 "def"    return TOKEN(TOKEN_DEFINE);
-":"      return TOKEN(TOKEN_TYPEHINT);
+","      return TOKEN(TOKEN_COMMASEPARATOR);
 
 [A-Za-z][A-Za-z0-9]* {//Identifier
-	yylval.identifier = new cinroll::nodes::identifier(std::string(yytext,yyleng));
+	yylval.identifier = (str){(size_t)yyleng,yytext};
 	return IDENTIFIER;
 }
 
-[0-9]+ {//Integers
+[0-9][0-9_]* {//Integers
 	yylval.number = new cinroll::nodes::base10_number_literal(std::string(yytext,yyleng));
 	return INTEGER;
 }

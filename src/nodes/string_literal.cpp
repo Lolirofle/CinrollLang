@@ -4,7 +4,9 @@ namespace cinroll{namespace nodes{
 	string_literal::string_literal(std::string str) : str(str){}
 	string_literal::~string_literal(){}
 
-	void string_literal::print(std::ostream& out){
+	std::ostream& string_literal::operator<<(std::ostream& out){
 		out << "String(" << str << ')';
+
+		return out;
 	}
 }}

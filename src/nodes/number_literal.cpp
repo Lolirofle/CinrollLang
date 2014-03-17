@@ -3,8 +3,10 @@
 namespace cinroll{namespace nodes{
 	number_literal::number_literal(std::string str) : str(str){}
 
-	void number_literal::print(std::ostream& out){
+	std::ostream& number_literal::operator<<(std::ostream& out){
 		out << "Number[" << this->name() << "](" << str << ')';
+
+		return out;
 	}
 
 	base10_number_literal::base10_number_literal(std::string str) : number_literal(str){}

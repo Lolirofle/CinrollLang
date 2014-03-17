@@ -7,8 +7,10 @@ namespace cinroll{namespace nodes{
 	class expression{
 	public:
 		virtual ~expression();
-		virtual void print(std::ostream& out)=0;
+		virtual std::ostream& operator<<(std::ostream& out)=0;
 	};
+	
+	std::ostream& operator<<(std::ostream& out,expression& expr);
 }}
 
 #endif
