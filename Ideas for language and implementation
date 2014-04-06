@@ -63,6 +63,7 @@ Tuples/structures/argument lists are multiple values together:
 	(Int,Int) tuple = (2,4);
 	(Int a,Int b) namedTuple = (2,4);
 	`,` is the tuple join function as in "(1,2)"
+	(A,B,C) = (A,(B,C)) = ((A,B),C). This is not functioning like in C where alignment and padding may be appliced and the size of (A,B,A,B) may not neccesarily be equivalent to ((A,B),(A,B)). This makes it nessecary to include a "realsizeof" and "usedsizeof" where the used size indicates the total allocated space without the alignment at the beginning and the padding at the end.
 
 Pointer types:
 	The type definition is as following:

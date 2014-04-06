@@ -47,7 +47,7 @@ run:
 	./$(BINDIR)/$(OUT)
 
 $(GENDIR)/lang_rules$(SRCPOSTFIX): $(SRCDIR)/lang_rules.y
-	$(OUTPREFIX)bison$(OUTPOSTFIX) --warnings=all -d -o $@ $^
+	$(OUTPREFIX)bison$(OUTPOSTFIX) -v --warnings=all -d -o $@ $^
 
 $(GENDIR)/lang_rules.hpp: $(GENDIR)/lang_rules$(SRCPOSTFIX)
 

@@ -5,4 +5,5 @@
 #include "string_literal.hpp"
 #include "identifier_call.hpp"
 #include "function_call.hpp"
+#include "binary_operation.hpp"
 #include "definition.hpp"
