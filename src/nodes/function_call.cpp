@@ -8,7 +8,7 @@ namespace cinroll{namespace nodes{
 	}
 
 	std::ostream& function_call::operator<<(std::ostream& out){
-		out << "Function call: (" << *expr << ")(" << *arg << ")";
+		out << "(function (" << *expr << ") (" << *arg << "))";
 
 		return out;
 	}

@@ -9,7 +9,7 @@ namespace cinroll{namespace nodes{
 	}
 
 	std::ostream& block::operator<<(std::ostream& out){
-		out << "Block{";
+		out << "block{";
 		for(auto expr = this->expressions.begin(); expr!=this->expressions.end(); expr++){
 			out << *expr << "; ";
 		}

@@ -4,7 +4,7 @@ namespace cinroll{namespace nodes{
 	number_literal::number_literal(std::string str) : str(str){}
 
 	std::ostream& number_literal::operator<<(std::ostream& out){
-		out << "Number[" << this->name() << "](" << str << ')';
+		out << "(num [" << this->name() << "] " << str << ")";
 
 		return out;
 	}

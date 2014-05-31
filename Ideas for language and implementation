@@ -116,3 +116,5 @@ Memory management:
 	"HeapPointer" is a child type of "Pointer"
 
 Runtime types:
+
+Namespaces, static namespaces and exported namespaces

@@ -25,3 +25,5 @@ function a(int i) = int(5)
 
 type test_function = function(int,int)
 test_function a(i) = _+1;
+
+Able to have different implementations for different "type classes"

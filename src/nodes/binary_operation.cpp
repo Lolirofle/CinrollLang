@@ -10,7 +10,7 @@ namespace cinroll{namespace nodes{
 	}
 
 	std::ostream& binary_operation::operator<<(std::ostream& out){
-		out << "Binary operation: (" << *left << ") " << *op << " (" << *right << ")";
+		out << "(binop " << *left << " " << *op << " " << *right << ")";
 
 		return out;
 	}
