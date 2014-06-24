@@ -3,6 +3,20 @@
 %locations
 %error-verbose
 
+/* TODO:
+Statements:
+  Labels/goto
+  switch
+
+Expressions:
+  Practical way of allocating temporary memory and working with it
+  Compile-time language and also type system
+  
+Implementation:
+  `if` unary operator, taking any expression or a `else` type
+  `else` binary operator
+*/
+
 //%glr-parser
 
 %code requires{

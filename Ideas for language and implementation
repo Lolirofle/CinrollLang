@@ -118,3 +118,4 @@ Memory management:
 Runtime types:
 
 Namespaces, static namespaces and exported namespaces
+Classes without public data members, it could just be created using global scope
