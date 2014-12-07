@@ -1,0 +1,12 @@
+[root]
+name = "Cinroll"
+version = "0.0.1"
+dependencies = [
+ "peg 0.1.1 (git+https://github.com/kevinmehall/rust-peg.git)",
+]
+
+[[package]]
+name = "peg"
+version = "0.1.1"
+source = "git+https://github.com/kevinmehall/rust-peg.git#353b4b6ab87e606c4ecd05dd6522797f1cd1a272"
+

@@ -1,0 +1,8 @@
+[package]
+
+name = "Cinroll"
+version = "0.0.1"
+authors = ["Lolirofle <lolipopple@hotmail.com>"]
+
+[dependencies.peg]
+git = "https://github.com/kevinmehall/rust-peg.git"
