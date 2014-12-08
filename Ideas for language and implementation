@@ -119,3 +119,10 @@ Runtime types:
 
 Namespaces, static namespaces and exported namespaces
 Classes without public data members, it could just be created using global scope
+Data types "with" and "without" certain optional properties/values. E.g. "Pointer[A] with Null". That specific subtype "Null" should then only be accepted for use in the type "Pointer"
+fn swap((Pointer[A with Size[n]] without Null) a,(Pointer[B with Size[n]] without Null) b) where{
+	tmp = a
+} = {
+	a = b;
+	b = tmp;
+}
