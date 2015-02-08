@@ -1,17 +1,20 @@
-#[deriving(Show)]
+use std::ffi::CString;
+
+#[derive(Debug)]
 pub enum Statement{
-	Definition(String,String,Expression),
-	Import(String),
+	Definition(CString,CString,Expression),
+	Import(CString),
 }
 
-#[deriving(Show)]
+#[derive(Debug)]
 pub enum Expression{
 	Unit,
-	NumberLiteral(int),
+	NumberLiteral(isize),
 	StringLiteral(String),
-	IdentifierLookup(String),
-	IdentifierCall(String,Box<Expression>),
+	FunctionLiteral(Box<Expression>),
+	IdentifierLookup(CString),
+	IdentifierCall(CString,Box<Expression>),
 	ExpressionCall(Box<Expression>,Box<Expression>),
-	OperatorCall(String,Box<Expression>,Box<Expression>),
+	OperatorCall(CString,Box<Expression>,Box<Expression>),
 	LazyExpression(Box<Expression>),
 }
